@@ -12,7 +12,7 @@ class myDataset(Dataset):
       raise ValueError('Invalid `path` variable! Needs to be a directory')
     self.texts = []
     self.labels = []
-    for label in ['1 star','2 stars','3 stars','4 stars','5 stars']:
+    for label in ['1 star','2 star','3 star','4 star','5 star']:
       sentiment_path = os.path.join(path, label)
       files_names = os.listdir(sentiment_path)
       for file_name in tqdm(files_names, desc=f'{label} files'):

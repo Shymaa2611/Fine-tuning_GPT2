@@ -3,8 +3,6 @@ from model import Gpt2ClassificationCollator
 from torch.utils.data import DataLoader
 from dataset import myDataset
 from transformers import (set_seed,
-                          TrainingArguments,
-                          Trainer,
                           GPT2Config,
                           GPT2Tokenizer,
                           AdamW, 
