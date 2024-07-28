@@ -12,6 +12,7 @@ import tqdm
 from sklearn.metrics import accuracy_score
 from train import train
 from validation import validation
+from utils import save_checkpoint
 
 labels_ids = {'1 star': 0, '2 star': 1,'3 star':2,'4 star':3,'5 star':4}
 
@@ -64,6 +65,8 @@ def run():
       valid_labels, valid_predict, val_loss = validation(valid_dataloader,model)
       val_acc = accuracy_score(valid_labels, valid_predict)
       print("  train_loss: %.5f - val_loss: %.5f - train_acc: %.5f - valid_acc: %.5f"%(train_loss, val_loss, train_acc, val_acc))
+      checkpoint_path = f"checkpoint_epoch_{epoch}.pt"
+      save_checkpoint(model, optimizer, scheduler, epoch, train_loss, checkpoint_path)
       all_loss['train_loss'].append(train_loss)
       all_loss['val_loss'].append(val_loss)
       all_acc['train_acc'].append(train_acc)
