@@ -17,7 +17,7 @@ from validation import validation
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 def get_model():
     set_seed(150)
-    labels_ids = {'1 star': 1, '2 stars': 2,'3 stars':3,'4 stars':4,'5 stars':5}
+    labels_ids = {'1 star': 0, '2 star': 1,'3 star':2,'4 star':3,'5 star':4}
     n_labels = len(labels_ids)
     model_config = GPT2Config.from_pretrained(pretrained_model_name='gpt2', num_labels=n_labels)
     tokenizer = GPT2Tokenizer.from_pretrained(pretrained_model_name='gpt2')
@@ -35,7 +35,7 @@ def run():
     max_length = 60
     epochs=5
     model,tokenizer=get_model()
-    labels_ids = {'1 star': 1, '2 stars': 2,'3 stars':3,'4 stars':4,'5 stars':5}
+    labels_ids = {'1 star': 0, '2 star': 1,'3 star':2,'4 star':3,'5 star':4}
     gpt2_classificaiton_collator = Gpt2ClassificationCollator(use_tokenizer=tokenizer, 
                                                           labels_encoder=labels_ids, 
                                                           max_sequence_len=max_length)
