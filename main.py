@@ -13,9 +13,9 @@ from sklearn.metrics import accuracy_score
 from train import train
 from validation import validation
 
+labels_ids = {'1 star': 0, '2 star': 1,'3 star':2,'4 star':3,'5 star':4}
 
 def get_model():
-    labels_ids = {'1 star': 0, '2 star': 1,'3 star':2,'4 star':3,'5 star':4}
     n_labels = len(labels_ids)
     model_config = GPT2Config.from_pretrained(pretrained_model_name='gpt2', num_labels=n_labels)
     tokenizer = GPT2Tokenizer.from_pretrained(pretrained_model_name='gpt2')
@@ -32,7 +32,6 @@ def run():
     max_length = 60
     epochs=5
     model,tokenizer=get_model()
-    labels_ids = {'1 star': 0, '2 star': 1,'3 star':2,'4 star':3,'5 star':4}
     gpt2_classificaiton_collator = Gpt2ClassificationCollator(use_tokenizer=tokenizer, 
                                                           labels_encoder=labels_ids, 
                                                           max_sequence_len=max_length)
@@ -71,3 +70,7 @@ def run():
       all_acc['val_acc'].append(val_acc)
       plot_dict(all_loss, use_xlabel='Epochs', use_ylabel='Value', use_linestyles=['-', '--'])
       plot_dict(all_acc, use_xlabel='Epochs', use_ylabel='Value', use_linestyles=['-', '--'])
+
+
+if __name__=="__main__":
+   run()
