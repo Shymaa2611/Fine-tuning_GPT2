@@ -1,14 +1,14 @@
 import tqdm
 import torch
 
-def train(dataloader, optimizer_, scheduler_, device_,model):
+def train(dataloader, optimizer_, scheduler_,model):
   predictions_labels = []
   true_labels = []
   total_loss = 0
   model.train()
   for batch in tqdm(dataloader, total=len(dataloader)):
     true_labels += batch['labels'].numpy().flatten().tolist()
-    batch = {k:v.type(torch.long).to(device_) for k,v in batch.items()}
+    batch = {k:v.type(torch.long) for k,v in batch.items()}
     model.zero_grad()
     outputs = model(**batch)
     loss, logits = outputs[:2]
